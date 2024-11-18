@@ -1,0 +1,6 @@
+bazel-bazel_shell_completion
+bazel-bin
+bazel-out
+bazel-testlogs
+.remote.bazelrc
+.local.bazelrc

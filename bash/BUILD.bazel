@@ -1,0 +1,8 @@
+load(":template_versions.bzl", "template_versions")
+load("//:versions.bzl", "BAZEL_VERSIONS")
+
+template_versions(
+    name = "bash_completion",
+    docker_file_template = "Dockerfile.jinja",
+    bazel_versions = BAZEL_VERSIONS,
+)
