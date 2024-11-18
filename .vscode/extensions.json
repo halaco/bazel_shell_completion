@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+      "bazelbuild.vscode-bazel",
+      "streetsidesoftware.code-spell-checker",
+      "mhutchie.git-graph",
+      "shardulm94.trailing-spaces",
+      "ms-python.python",
+      "ms-azuretools.vscode-docker",
+    ]
+}

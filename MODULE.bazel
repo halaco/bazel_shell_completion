@@ -1,0 +1,6 @@
+module(
+    name = "bazel-shell-completion",
+    version = "0.0.0",
+    compatibility_level = 1,
+)
+

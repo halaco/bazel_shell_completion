@@ -1,0 +1,8 @@
+common --enable_bzlmod
+common --spawn_strategy=standalone
+
+try-import .local.bazelrc
+
+# Add `.bazel.remote` when the project can be built remotely.
+# The main purpose of this file is to enable remote caching and execution on BuildBuddy.
+try-import .remote.bazelrc
