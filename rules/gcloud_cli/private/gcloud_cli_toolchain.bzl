@@ -19,11 +19,6 @@ def _gcloud_cli_toolchain_impl(ctx):
 gcloud_cli_toolchain = rule(
     implementation = _gcloud_cli_toolchain_impl,
     attrs = {
-        "gcloud_path": attr.string(),
+        "gcloud_path": attr.label(),
     },
 )
-
-
-def declare_gcloud_cli_toolchains(
-
-):

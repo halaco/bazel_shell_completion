@@ -6,9 +6,20 @@ load("@bazel_skylib//lib:paths.bzl", "paths")
 DEFAULT_RELEASE_BASE_URL = "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads"
 ARCHIVED_RELEASE_BASE_URL = "https://storage.googleapis.com/cloud-sdk-release"
 
-LATEST_CLI_VERSION = "477.0.0"
+LATEST_CLI_VERSION = "503.0.0"
 
 CLI_VERSIONS = {
+    "503.0.0": {
+        "url": "google-cloud-cli-{version}-{os}-{arch}.{ext}",
+        "sha256": {
+            "aarch64-apple-darwin": "a3e277d1fffccc78faf89967f90d986df583d4595c75f1fc82e3791d34af35a2",
+            "aarch64-unknown-linux-gnu": "a87ac6e06adfded3272de29b0b97dc24d972f9c92cbd7c9f98e01942c783d8e0",
+            "x86_64-apple-darwin": "bb2dfa794ff5955d44cc127153d7edc2724b91c12f8690220b34db7c29ba5baf",
+            "x86_64-unknown-linux-gnu": "7a678b51438ed782961a8440b30178ae4bd99d164f0cd19d7a0d93a530f3485d",
+        },
+        "archived": False,
+        "strip_prefix": "google-cloud-sdk",
+    },
     # Actual URLs
     # https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-477.0.0-darwin-arm.tar.gz
     # https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-477.0.0-linux-arm.tar.gz
@@ -23,7 +34,7 @@ CLI_VERSIONS = {
             "x86_64-unknown-linux-gnu": "532fb4bc9f42cfb6bddd5dacaec0dd446f08987e822f99d68fbcfa32a8899c1d",
         },
         "archived": False,
-        "strip_prefix" = "google-cloud-sdk",
+        "strip_prefix": "google-cloud-sdk",
     }
 }
 
@@ -101,16 +112,14 @@ CLI_PLATFORMS = {
 }
 
 
-def version_repository(version="latest", cli_versions = CLI_VERSIONS, cli_platforms=CLI_PLATFORMS):
-    if version == "latest":
-        actual_version = LATEST_CLI_VERSION
-    else:
-        actual_version = version
+def get_repository_info(platform=None, version=None, cli_versions = CLI_VERSIONS, cli_platforms=CLI_PLATFORMS):
+    actual_version = version or LATEST_CLI_VERSION
 
     cli_repository = cli_versions[actual_version]
+    cli_platform = cli_platforms[platform]
 
-    os =
-    arch = 
+    os = cli_platform.os_name
+    arch = cli_platform.arch
     ext = "tar.gz"
 
     if cli_repository["archived"]:
@@ -118,15 +127,15 @@ def version_repository(version="latest", cli_versions = CLI_VERSIONS, cli_platfo
     else:
         base_url = DEFAULT_RELEASE_BASE_URL
 
-    file_name = cli_repository.url.format(
+    file_name = cli_repository["url"].format(
         version = actual_version,
         os = os,
         arch = arch,
         ext = ext,
     )
 
-    return struct(
-        url = paths.join(base_url, file_name),
-        sha256 = 
-        strip_prefix = cli_repository.strip_prefix,
-    )
+    return [
+        paths.join(base_url, file_name),
+        cli_repository["sha256"][platform],
+        cli_repository["strip_prefix"],
+    ]

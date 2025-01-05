@@ -1,0 +1,5 @@
+workspace(name = "bazel-shell-completion")
+
+load("//rules/gcloud_cli:defs.bzl", "gcloud_cli_register_toolchains")
+
+gcloud_cli_register_toolchains()

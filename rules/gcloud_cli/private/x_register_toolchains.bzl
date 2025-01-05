@@ -7,17 +7,18 @@ load(
 )
 
 def gcloud_cli_register_toolchains(
-    name,
+    name = None,
     version = None,
     tool_versions = None):
     """
+    Register Gcloud CLI as a bazel toolchain.
 
     Args:
         name:
         version:
-        tool_version:
+        tool_versions:
     """
-
+    name = name or "gcloud_cli"
     version = version or LATEST_VERSION
     tool_versions = tool_versions or TOOLS_VERSIONS
 
@@ -44,6 +45,7 @@ def gcloud_cli_register_toolchains(
             toolchain_repo_name = toolchain_repo_name,
             platform = platform,
         ))
+
 
     toolchains_repo(
         name = toolchain_repo_name,

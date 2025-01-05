@@ -1,0 +1,14 @@
+package(default_visibility = ["//visibility:public"])
+
+load("@%{workspace_repo_name}//rules/gcloud_cli/private:gcloud_cli_toolchain.bzl", "gcloud_cli_toolchain")
+
+filegroup(
+    name = "gcloud_cli",
+    srcs = ["bin/gcloud"],
+)
+
+
+gcloud_cli_toolchain(
+    name = "toolchain",
+    gcloud_path = "@@%{toolchain_repository}//:gcloud_cli",
+)

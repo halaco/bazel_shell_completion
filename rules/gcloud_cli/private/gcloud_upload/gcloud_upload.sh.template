@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# run 'gcloud auth list' to fetch the authentication status.
+AUTH_LIST=$(%{gcloud_path} auth list 2>/dev/null)
+
+# Check if the expected line is in the output
+if echo "$AUTH_LIST" | grep -q "^\* "; then
+    echo "Already authorized"
+else
+    %{gcloud_path} auth login
+fi
+
+%{gcloud_path} storage cp "%{src}" "%{dst}"
+
+exit
+
