@@ -3,17 +3,45 @@
 //
 // See https://aka.ms/devcontainer.json for more information.
 {
-	"name": "Gitpod",
+	"name": "Bazel Shell Completion",
+    // Preserve github config by initialize.sh and initialize git with it by post-create.sh.
+    // https://zenn.dev/vol1003/articles/f42f2dd4dcd2f1
+    "initializeCommand": "/bin/bash .devcontainer/scripts/initialize.sh",
+    "postCreateCommand": "/bin/bash .devcontainer/scripts/post-create.sh",
 	// Use "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu",
 	// instead of the build to use a pre-built image.
 	"build": {
         "context": ".",
         "dockerfile": "Dockerfile"
     },
+	"runArgs": [
+        "--env-file",
+        ".devcontainer/.env"
+    ],
+
+    "containerEnv": {
+        "TZ": "Asia/Tokyo"
+    },
 	// Features add additional features to your environment. See https://containers.dev/features
 	// Beware: features are not supported on all platforms and may have unintended side-effects.
 	"features": {
         "ghcr.io/devcontainers/features/docker-in-docker:2": {},
 		"ghcr.io/devcontainers-community/features/bazel:1": {}
+    },
+	"customizations": {
+        "vscode": {
+            "settings": {
+                "editor.tabSize": 4,
+                "files.autoSave": "onFocusChange"
+            },
+            "extensions": [
+                "bazelbuild.vscode-bazel",
+                "streetsidesoftware.code-spell-checker",
+                "mhutchie.git-graph",
+                "shardulm94.trailing-spaces",
+				"ms-python.python",
+				"ms-azuretools.vscode-docker"
+            ]
+        }
     }
 }

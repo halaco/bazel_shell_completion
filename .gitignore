@@ -1,3 +1,4 @@
+.devcontainer/.env
 bazel-bazel_shell_completion
 bazel-bin
 bazel-out
