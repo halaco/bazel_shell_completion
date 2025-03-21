@@ -29,7 +29,7 @@ def template_versions(name, docker_file_template, bazel_versions):
             dockerfile = template_step_name,
             prefix = prefix,
             image_tag = generate_step_name,
-            path_in_container = "/opt/bazel/bash_complation.d/bazel." + version,
+            path_in_container = "/opt/bazel/bash_completion.d/bazel." + version,
             output = "bazel." + version,
         )
 

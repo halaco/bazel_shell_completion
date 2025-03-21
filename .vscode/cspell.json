@@ -6,13 +6,14 @@
     "language": "en",
     // words - list of words to be always considered correct
     "words": [
-        "halaco",
         "bazel",
         "bazelbuild",
         "bazelisk",
+        "devcontainers",
+        "halaco",
+        "keyrings",
         "mhutchie",
-        "shardulm",
-        "devcontainers"
+        "shardulm"
     ],
     // flagWords - list of words to be always considered incorrect
     // This is useful for offensive words and common spelling errors.
